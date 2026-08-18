@@ -1,0 +1,12 @@
+_old_web_media/
+_superseded/
+_old/
+_rejects/
+_talking_head/
+__pycache__/
+.DS_Store
+*.zip
+*.mp4
+*.mov
+*.wav
+*.part

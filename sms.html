@@ -1,0 +1,173 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SMS — Brook Hiddink / High Ticket — Swipe</title><style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--panel:#f8fafc;--bg:#eef0f3;
+ --accent:#4f46e5;--ever:#059669;--event:#ea580c;--rose:#9f1239}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);
+ font-family:Inter,system-ui,-apple-system,'Segoe UI',sans-serif;
+ -webkit-font-smoothing:antialiased;line-height:1.55}
+h1,h2,h3,h4{font-weight:500;letter-spacing:-.02em}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+header.top{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
+.topin{max-width:1180px;margin:0 auto;padding:0 28px;display:flex;align-items:center;
+ gap:26px;height:60px}
+.brand{font-size:15px;font-weight:500;white-space:nowrap}
+.brand span{color:var(--muted);font-weight:400}
+nav.main{display:flex;gap:20px;overflow-x:auto;scrollbar-width:none}
+nav.main::-webkit-scrollbar{display:none}
+nav.main a{font-size:14px;color:var(--muted);text-decoration:none;white-space:nowrap;
+ padding:6px 0;border-bottom:2px solid transparent}
+nav.main a:hover{color:var(--ink)}
+nav.main a.on{color:var(--ink);border-bottom-color:var(--accent)}
+.hero{padding:54px 0 30px}
+.kick{font-size:13px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);
+ margin-bottom:12px}
+.hero h1{font-size:44px;margin-bottom:14px}
+.hero p{font-size:18px;color:#475569;max-width:820px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:14px;
+ margin:30px 0 8px}
+.tile{background:#fff;border:1px solid var(--line);border-radius:12px;padding:17px 19px}
+.tile b{display:block;font-size:26px;font-weight:500;letter-spacing:-.03em}
+.tile span{font-size:12.5px;color:var(--muted);display:block;margin-top:3px;line-height:1.4}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:16px;
+ margin:26px 0 50px}
+a.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;
+ text-decoration:none;display:block;transition:.15s;border-top:4px solid var(--accent)}
+a.card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(15,23,42,.13);
+ border-color:#94a3b8}
+a.card h3{font-size:19px;margin-bottom:7px}
+a.card p{font-size:14px;color:#475569;line-height:1.55}
+a.card em{font-style:normal;font-size:12px;color:var(--muted);display:block;margin-top:11px;
+ font-family:ui-monospace,Menlo,monospace}
+section{padding:34px 0}
+section h2{font-size:29px;margin-bottom:9px}
+section .lede{font-size:16.5px;color:#475569;max-width:840px;margin-bottom:22px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px;
+ margin-bottom:18px}
+.panel h3{font-size:20px;margin-bottom:10px}
+.panel p{font-size:15px;color:#334155;margin-bottom:11px}
+.panel p:last-child{margin-bottom:0}
+.panel ul{margin:0 0 12px 19px}
+.panel li{font-size:15px;color:#334155;margin-bottom:7px}
+blockquote{border-left:3px solid var(--accent);padding:3px 0 3px 16px;margin:14px 0;
+ font-size:15px;color:#1e293b;background:#f8fafc}
+blockquote em{font-style:normal;color:var(--muted);font-size:13px;display:block;margin-top:5px}
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin:6px 0 14px}
+th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:500;color:var(--muted);font-size:12.5px;letter-spacing:.06em;
+ text-transform:uppercase}
+.scroller{overflow-x:auto}
+.grid{display:grid;gap:13px}
+.g6{grid-template-columns:repeat(auto-fill,minmax(178px,1fr))}
+.g4{grid-template-columns:repeat(auto-fill,minmax(232px,1fr))}
+figure.sh{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;
+ cursor:zoom-in;transition:.13s}
+figure.sh:hover{border-color:#94a3b8;box-shadow:0 8px 20px rgba(15,23,42,.13)}
+figure.sh img{display:block;width:100%;height:auto;background:var(--panel)}
+figure.sh figcaption{padding:8px 10px;font-size:11.5px;color:var(--muted);
+ font-family:ui-monospace,Menlo,monospace;display:flex;justify-content:space-between;gap:8px}
+figure.sh figcaption b{color:var(--ink);font-weight:500}
+.anchor figcaption b{color:#b45309}
+.mailcap{padding:9px 11px}
+.mailcap b{display:block;font-size:11px;color:var(--muted);font-weight:400;
+ font-family:ui-monospace,Menlo,monospace;margin-bottom:3px}
+.mailcap span{font-size:12.5px;line-height:1.35;display:block}
+.tx{background:#fff;border:1px solid var(--line);border-radius:14px;padding:30px 34px;
+ max-height:640px;overflow-y:auto}
+.tx p{font-size:15.5px;color:#1e293b;margin-bottom:15px;line-height:1.72;max-width:74ch}
+.tx p b{font-family:ui-monospace,Menlo,monospace;font-size:12.5px;color:var(--accent);
+ font-weight:500;margin-right:7px}
+.bar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:16px}
+.bar button,.bar a.btn{font:inherit;font-size:13.5px;padding:8px 15px;border-radius:8px;
+ border:1px solid var(--line);background:#fff;cursor:pointer;text-decoration:none;color:inherit}
+.bar button:hover,.bar a.btn:hover{border-color:#94a3b8}
+.bar button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.pill{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+ padding:3px 9px;border-radius:5px;background:#eef2ff;color:#4338ca;margin:0 5px 5px 0}
+.pill.g{background:#ecfdf5;color:#047857}
+.pill.o{background:#fff7ed;color:#c2410c}
+.note{border:1px solid #fde68a;background:#fffbeb;border-radius:10px;padding:15px 18px;
+ font-size:14px;color:#78350f;margin-bottom:18px}
+footer{border-top:1px solid var(--line);margin-top:40px;padding:26px 0 50px;
+ font-size:13px;color:var(--muted)}
+#lb{position:fixed;inset:0;background:rgba(8,12,22,.93);display:none;z-index:200;
+ align-items:center;justify-content:center;flex-direction:column;gap:14px;padding:26px}
+#lb.on{display:flex}
+#lb img{max-width:96vw;max-height:83vh;object-fit:contain;border-radius:5px}
+#lb .meta{color:#cbd5e1;font-size:13px;font-family:ui-monospace,Menlo,monospace;
+ display:flex;gap:18px;align-items:center}
+#lb .meta a{color:#93c5fd}
+#lb .x{position:absolute;top:16px;right:22px;color:#94a3b8;font-size:30px;cursor:pointer;
+ line-height:1}
+@media(max-width:720px){.hero h1{font-size:33px}.wrap,.topin{padding:0 17px}
+ .tx{padding:20px}}
+</style>
+<script>var LBS=[],LBI=0;</script></head><body>
+<header class="top"><div class="topin">
+<div class="brand">Brook Hiddink <span>/ High Ticket</span></div>
+<nav class="main"><a href="index.html">Overview</a><a href="vsl.html">The VSL</a><a href="webinar.html">Webinar</a><a href="emails.html">Emails</a><a href="sms.html" class='on'>SMS</a><a href="transcripts.html">Transcripts</a><a href="ads.html">Ads</a><a href="board.html">Wired board</a></nav></div></header>
+<div class="wrap">
+<div class="hero"><div class="kick">Asset · SMS</div>
+<h1>Three people who are all the same bot</h1>
+<p>Every text arrives from a different named human on its own Google Voice number.
+Two full registration cycles captured, a month apart.</p></div>
+
+<section><h2>The personas</h2><div class="panel scroller"><table><thead><tr><th>Persona</th><th>Number</th><th>Role</th><th>What they send</th></tr></thead><tbody><tr><td>Brook Hiddink (personal)</td><td>(720) 610-3324</td><td>Pre-event. Opens as if Brook is texting personally.</td><td><span>&ldquo;hey is this Will? it&#x27;s brook from high ticket.&rdquo;<br>&ldquo;saw you grabbed a seat on my workshop later. you excited?&rdquo;<br>&ldquo;you planning on joining from your cell or laptop?&rdquo;<br>&ldquo;quick q before tonight - what made you sign up? want make sure i actually cover the thing you care about, not just talk at you for an hour&rdquo;</span></td></tr><tr><td>Anastasia, &quot;Brook Hiddink&#x27;s personal assistant&quot;</td><td>(877) 730-9884</td><td>Logistics, live push, no-show recovery, then long-tail downsell nurture.</td><td><span>&ldquo;Hey Will, Anastasia here (Brook Hiddink&#x27;s personal assistant) with some incredible news. Your seat on the One Order Away Workshop is now confirmed&rdquo;<br>&ldquo;We are LIVE for the EVENT, Will! Tap this link to join the Live Room here NOW on a desktop/laptop... $2000+ in FREE Gifts for attending&rdquo;<br>&ldquo;Will Anastasia here. Brook just went live! You haven&#x27;t missed the Golden Ticket reveal yet, but it&#x27;s coming up fast.&rdquo;<br>&ldquo;We just shot you over an email a few minutes ago. In short..... we were disappointed not to see you on the event last night&rdquo;</span></td></tr><tr><td>Jack, &quot;from High Ticket with Brook Hiddink&quot;</td><td>(814) 822-5129</td><td>Post-event replay push.</td><td><span>&ldquo;Hiya John, Jack here from High Ticket with Brook Hiddink. Did you make it to our Webinar on Zoom? Here is the recording if you missed it&rdquo;</span></td></tr></tbody></table></div></section>
+
+<section><h2>The tell: it is the same script every cycle</h2>
+<div class="panel">
+<p>Registering in June and again in July produced the <b>identical four-message
+sequence</b> from "Brook", word for word, only the name changed:</p>
+<blockquote>"hey is this Will? it's brook from high ticket" &rarr; "saw you grabbed a
+seat on my workshop later. you excited?" &rarr; "you planning on joining from your cell
+or laptop?" &rarr; "quick q before tonight - what made you sign up?"
+<em>21 June 2026</em></blockquote>
+<blockquote>"hey is this Hans? it's brook hiddink" &rarr; "think you were just watching
+one of my ads and signed up for my workshop later - can you confirm you'll be
+attending?" &rarr; "you planning on joining from your cell or laptop?" &rarr; "quick q
+before tonight - what made you sign up?"<em>21 July 2026</em></blockquote>
+<p>It reads personal and it is fully automated. <b>The move worth stealing is the
+fourth message</b> — asking what made them sign up. It is reply-bait dressed as
+service, and a reply is what keeps the thread deliverable.</p>
+</div></section>
+
+<section><h2>The downsell ladder runs over SMS too</h2>
+<div class="panel"><p>When the main program does not land, the same channel walks the
+lead down to a cheaper offer and then to payments.</p><ul><li>&ldquo;Hey Will, Brook here… Noticed you didn&#x27;t grab the High Ticket Accelerator last week. No worries - I get it. Big commitment, right? That&#x27;s why I created something a bit different…&rdquo;</li><li>&ldquo;Will - I&#x27;m writing this at 4 AM. Can&#x27;t sleep because I know some good people are going to miss this. Tonight at midnight, I&#x27;m pulling the High Ticket Accelerator Lite forever.&rdquo;</li><li>&ldquo;Hey, still thinking about the high ticket ai accelerator? What if you spread payments over time? Start with as little as $295/month.&rdquo;</li><li>&ldquo;Will - 12 hours left to join High Ticket Accelerator Lite. Tomorrow you&#x27;ll either wake up with access to my complete &#x27;millionaire blueprint&#x27;... Or you&#x27;ll wake up with&rdquo;</li></ul>
+<p>Main program &rarr; <b>High Ticket Accelerator Lite</b> &rarr; <b>$295/month</b>.
+All of it by text, with a hard midnight deadline.</p></div></section>
+
+<section><h2>He tests completely different avatars by SMS</h2>
+<div class="panel"><ul><li>&ldquo;Hi Will, Brook here. You spent decades building real expertise. What if that knowledge could now earn you $3K-$5K/month without consulting calls or taking on again full-time work? Retirees&rdquo;</li><li>&ldquo;Will, Harvard research found that 73% of retirees are coming up $2000 short every month. Not once - every month, for life.&rdquo;</li><li>&ldquo;Will, Will you be there for the special moments with your son growing up? Or what about your daughter? Or will you miss those moments for meetings?&rdquo;</li><li>&ldquo;Will, Just created a brand new workshop for 9-5ers.... I know that feeling of dread you have before work every day, because I used to have it myself.&rdquo;</li></ul>
+<p>Retirees short $2,000 a month, parents missing their kids growing up, 9-5ers who
+dread Monday. Same offer, different pain, delivered to the same list.</p></div></section>
+
+<div class="note"><b>The contrast with Shelby.</b> She sends nothing by text between
+registration and her class — her pre-class channel is email only, 43 days straight.
+Brook barely emails and texts constantly as three people. They are near-exact
+inverses.</div>
+</div>
+<footer><div class="wrap">Private research swipe. Captured 30 July 2026.
+Screenshots are unaltered frames from the source recordings and live pages —
+branding and copyright notices preserved. Not affiliated with High Ticket / Brook Hiddink.
+</div></footer>
+<div id="lb"><span class="x" onclick="closeLb()">&times;</span>
+<img id="lbi" alt=""><div class="meta"><span id="lbm"></span></div></div>
+<script>
+function openLb(i){LBI=i;var s=LBS[i];if(!s)return;
+ document.getElementById('lbi').src=s.full;
+ document.getElementById('lbm').textContent=s.cap;
+ document.getElementById('lb').classList.add('on');}
+function closeLb(){document.getElementById('lb').classList.remove('on');}
+document.addEventListener('keydown',function(e){
+ var o=document.getElementById('lb').classList.contains('on');if(!o)return;
+ if(e.key==='Escape')closeLb();
+ if(e.key==='ArrowRight'&&LBI<LBS.length-1)openLb(LBI+1);
+ if(e.key==='ArrowLeft'&&LBI>0)openLb(LBI-1);});
+document.getElementById('lb').addEventListener('click',function(e){
+ if(e.target.id==='lb')closeLb();});
+</script>
+</body></html>

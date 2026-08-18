@@ -1,0 +1,190 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Brook Hiddink / High Ticket — Swipe</title><style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--panel:#f8fafc;--bg:#eef0f3;
+ --accent:#4f46e5;--ever:#059669;--event:#ea580c;--rose:#9f1239}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);
+ font-family:Inter,system-ui,-apple-system,'Segoe UI',sans-serif;
+ -webkit-font-smoothing:antialiased;line-height:1.55}
+h1,h2,h3,h4{font-weight:500;letter-spacing:-.02em}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+header.top{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
+.topin{max-width:1180px;margin:0 auto;padding:0 28px;display:flex;align-items:center;
+ gap:26px;height:60px}
+.brand{font-size:15px;font-weight:500;white-space:nowrap}
+.brand span{color:var(--muted);font-weight:400}
+nav.main{display:flex;gap:20px;overflow-x:auto;scrollbar-width:none}
+nav.main::-webkit-scrollbar{display:none}
+nav.main a{font-size:14px;color:var(--muted);text-decoration:none;white-space:nowrap;
+ padding:6px 0;border-bottom:2px solid transparent}
+nav.main a:hover{color:var(--ink)}
+nav.main a.on{color:var(--ink);border-bottom-color:var(--accent)}
+.hero{padding:54px 0 30px}
+.kick{font-size:13px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);
+ margin-bottom:12px}
+.hero h1{font-size:44px;margin-bottom:14px}
+.hero p{font-size:18px;color:#475569;max-width:820px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:14px;
+ margin:30px 0 8px}
+.tile{background:#fff;border:1px solid var(--line);border-radius:12px;padding:17px 19px}
+.tile b{display:block;font-size:26px;font-weight:500;letter-spacing:-.03em}
+.tile span{font-size:12.5px;color:var(--muted);display:block;margin-top:3px;line-height:1.4}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:16px;
+ margin:26px 0 50px}
+a.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;
+ text-decoration:none;display:block;transition:.15s;border-top:4px solid var(--accent)}
+a.card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(15,23,42,.13);
+ border-color:#94a3b8}
+a.card h3{font-size:19px;margin-bottom:7px}
+a.card p{font-size:14px;color:#475569;line-height:1.55}
+a.card em{font-style:normal;font-size:12px;color:var(--muted);display:block;margin-top:11px;
+ font-family:ui-monospace,Menlo,monospace}
+section{padding:34px 0}
+section h2{font-size:29px;margin-bottom:9px}
+section .lede{font-size:16.5px;color:#475569;max-width:840px;margin-bottom:22px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px;
+ margin-bottom:18px}
+.panel h3{font-size:20px;margin-bottom:10px}
+.panel p{font-size:15px;color:#334155;margin-bottom:11px}
+.panel p:last-child{margin-bottom:0}
+.panel ul{margin:0 0 12px 19px}
+.panel li{font-size:15px;color:#334155;margin-bottom:7px}
+blockquote{border-left:3px solid var(--accent);padding:3px 0 3px 16px;margin:14px 0;
+ font-size:15px;color:#1e293b;background:#f8fafc}
+blockquote em{font-style:normal;color:var(--muted);font-size:13px;display:block;margin-top:5px}
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin:6px 0 14px}
+th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:500;color:var(--muted);font-size:12.5px;letter-spacing:.06em;
+ text-transform:uppercase}
+.scroller{overflow-x:auto}
+.grid{display:grid;gap:13px}
+.g6{grid-template-columns:repeat(auto-fill,minmax(178px,1fr))}
+.g4{grid-template-columns:repeat(auto-fill,minmax(232px,1fr))}
+figure.sh{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;
+ cursor:zoom-in;transition:.13s}
+figure.sh:hover{border-color:#94a3b8;box-shadow:0 8px 20px rgba(15,23,42,.13)}
+figure.sh img{display:block;width:100%;height:auto;background:var(--panel)}
+figure.sh figcaption{padding:8px 10px;font-size:11.5px;color:var(--muted);
+ font-family:ui-monospace,Menlo,monospace;display:flex;justify-content:space-between;gap:8px}
+figure.sh figcaption b{color:var(--ink);font-weight:500}
+.anchor figcaption b{color:#b45309}
+.mailcap{padding:9px 11px}
+.mailcap b{display:block;font-size:11px;color:var(--muted);font-weight:400;
+ font-family:ui-monospace,Menlo,monospace;margin-bottom:3px}
+.mailcap span{font-size:12.5px;line-height:1.35;display:block}
+.tx{background:#fff;border:1px solid var(--line);border-radius:14px;padding:30px 34px;
+ max-height:640px;overflow-y:auto}
+.tx p{font-size:15.5px;color:#1e293b;margin-bottom:15px;line-height:1.72;max-width:74ch}
+.tx p b{font-family:ui-monospace,Menlo,monospace;font-size:12.5px;color:var(--accent);
+ font-weight:500;margin-right:7px}
+.bar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:16px}
+.bar button,.bar a.btn{font:inherit;font-size:13.5px;padding:8px 15px;border-radius:8px;
+ border:1px solid var(--line);background:#fff;cursor:pointer;text-decoration:none;color:inherit}
+.bar button:hover,.bar a.btn:hover{border-color:#94a3b8}
+.bar button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.pill{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+ padding:3px 9px;border-radius:5px;background:#eef2ff;color:#4338ca;margin:0 5px 5px 0}
+.pill.g{background:#ecfdf5;color:#047857}
+.pill.o{background:#fff7ed;color:#c2410c}
+.note{border:1px solid #fde68a;background:#fffbeb;border-radius:10px;padding:15px 18px;
+ font-size:14px;color:#78350f;margin-bottom:18px}
+footer{border-top:1px solid var(--line);margin-top:40px;padding:26px 0 50px;
+ font-size:13px;color:var(--muted)}
+#lb{position:fixed;inset:0;background:rgba(8,12,22,.93);display:none;z-index:200;
+ align-items:center;justify-content:center;flex-direction:column;gap:14px;padding:26px}
+#lb.on{display:flex}
+#lb img{max-width:96vw;max-height:83vh;object-fit:contain;border-radius:5px}
+#lb .meta{color:#cbd5e1;font-size:13px;font-family:ui-monospace,Menlo,monospace;
+ display:flex;gap:18px;align-items:center}
+#lb .meta a{color:#93c5fd}
+#lb .x{position:absolute;top:16px;right:22px;color:#94a3b8;font-size:30px;cursor:pointer;
+ line-height:1}
+@media(max-width:720px){.hero h1{font-size:33px}.wrap,.topin{padding:0 17px}
+ .tx{padding:20px}}
+</style>
+<script>var LBS=[],LBI=0;</script></head><body>
+<header class="top"><div class="topin">
+<div class="brand">Brook Hiddink <span>/ High Ticket</span></div>
+<nav class="main"><a href="index.html" class='on'>Overview</a><a href="vsl.html">The VSL</a><a href="webinar.html">Webinar</a><a href="emails.html">Emails</a><a href="sms.html">SMS</a><a href="transcripts.html">Transcripts</a><a href="ads.html">Ads</a><a href="board.html">Wired board</a></nav></div></header>
+<div class="wrap">
+<div class="hero"><div class="kick">Funnel swipe · captured 30 July 2026</div>
+<h1>Brook Hiddink — High Ticket</h1>
+<p>Law-student-to-$30M e-commerce coach. <b>Two funnels at two completely different
+price points, and they do not feed each other.</b> A 42-minute VSL into a high-ticket
+application and a booked call. And a nightly live event that sells a <b>$995 product on
+a direct checkout</b> — no call, no application. Everything here is evidence pulled off
+his live funnel.</p>
+<div class="tiles"><div class="tile"><b>24</b><span>videos captured</span></div><div class="tile"><b>7h 37m</b><span>of video</span></div><div class="tile"><b>585</b><span>ads analysed</span></div><div class="tile"><b>11</b><span>objection videos</span></div><div class="tile"><b>3</b><span>SMS personas</span></div><div class="tile"><b>2</b><span>live funnels</span></div></div>
+<div class="bar" style="margin-top:24px"><a class="btn" href="ads.html">
+His ads, segmented &rarr;</a></div></div>
+
+<section><h2>The two things worth stealing</h2>
+<div class="panel">
+<h3>1. A numbered objection library, played before the call</h3>
+<p>Eleven short videos, 20 seconds to 3 minutes, served on the pre-call page. Titled by
+objection number, and the numbering runs to at least 26 — so this is a fraction of what
+exists.</p><div class="panel scroller"><table><thead><tr><th>#</th><th>Objection it kills</th><th>Runtime</th></tr></thead><tbody><tr><td>1</td><td>I&#x27;ve Never Sold a Product Online Before</td><td>0:48</td></tr><tr><td>6</td><td>Can I Do This With a Full Time Job</td><td>0:26</td></tr><tr><td>8</td><td>I&#x27;m Not Tech Savvy. What Skills Are Required</td><td>0:26</td></tr><tr><td>15</td><td>Do You Have a Guarantee</td><td>1:04</td></tr><tr><td>18</td><td>How Many Hours Per Day Does This Require</td><td>0:23</td></tr><tr><td>21</td><td>What&#x27;s The Timeframe For Your First Sale</td><td>0:21</td></tr><tr><td>25</td><td>How Long Have You Been Doing It. Prove It</td><td>0:35</td></tr><tr><td>26</td><td>What Are Realistic Income/Results Expectations</td><td>0:36</td></tr></tbody></table></div>
+<p>Most competitors do this job with one long post-booking video. Brook has broken it
+into a library and can serve exactly the objection a given lead is likely to have.
+<b>This is the single most copyable asset in the funnel.</b></p>
+</div>
+<div class="panel">
+<h3>2. Three SMS personas, before the event</h3>
+<p>Every text arrives from a different named human, via Google Voice numbers.</p><div class="panel scroller"><table><thead><tr><th>Persona</th><th>Number</th><th>What they send</th></tr></thead><tbody><tr><td>Brook Hiddink</td><td>(720) 610-3324</td><td>&quot;hey is this Hans? it&#x27;s brook hiddink&quot; then &quot;think you were just watching one of my ads and signed up for my workshop later - can you confirm you&#x27;ll be attending?&quot; then &quot;quick q before tonight - what made you sign up? want make sure i actually cover the thing you care about&quot;</td></tr><tr><td>Anastasia, &quot;Brook&#x27;s personal assistant&quot;</td><td>(877) 730-9884</td><td>Confirms the seat, sends the room link at go-live, chases the no-show next morning.</td></tr><tr><td>Jack, &quot;from High Ticket with Brook Hiddink&quot;</td><td>(814) 822-5129</td><td>Post-event: &quot;Did you make it to our Webinar? Here is the recording if you missed it.&quot;</td></tr></tbody></table></div>
+<p>He opens with a personal "hey is this you?", follows with an assistant handling
+logistics, and closes with a third name pushing the replay. The first message asks a
+real question — <em>"what made you sign up? want make sure i actually cover the thing
+you care about"</em> — which is reply-bait, not a reminder.</p>
+</div></section>
+
+<section><h2>The video library</h2>
+<p class="lede">13 long-form case studies (442 min)
+and 11 short objection and utility clips, all at source quality.</p><div class="panel scroller"><table><thead><tr><th>Runtime</th><th>Video</th><th>Size</th></tr></thead><tbody><tr><td>02:14:39</td><td>WEBINAR REPLAY - One Order Away Method</td><td>1361 MB</td></tr><tr><td>00:42:46</td><td>MAIN VSL - One Order Away (freetraining)</td><td>181 MB</td></tr><tr><td>00:36:56</td><td>High Ticket AI Mastermind Overview</td><td>982 MB</td></tr><tr><td>00:31:32</td><td>Making 28000 in 30 Days with High Ticket Dropshipping</td><td>447 MB</td></tr><tr><td>00:29:34</td><td>0-100000 in 4 Months Dropshipping as a Beginner</td><td>369 MB</td></tr><tr><td>00:24:20</td><td>HT Dropshipping Case Study Rogers Success Story_ How Roger Built a Sto</td><td>217 MB</td></tr><tr><td>00:23:43</td><td>When You Make 50000 in a WEEK Dropshipping</td><td>218 MB</td></tr><tr><td>00:22:25</td><td>How this Dropshipper Made 167000 in A Day</td><td>280 MB</td></tr><tr><td>00:22:19</td><td>DROPSHIPPING CASE STUDY Yuvys Success Story_ Selling a 77000 Item with</td><td>248 MB</td></tr><tr><td>00:21:36</td><td>Jack and Joel Went From 80000 to 289000 in 2 Months</td><td>239 MB</td></tr><tr><td>00:19:34</td><td>How he makes 75000month dropshipping 10000 products</td><td>246 MB</td></tr><tr><td>00:17:02</td><td>Chris Generated 50000 in Sales in 1 Month with Dropshipping</td><td>208 MB</td></tr><tr><td>00:16:23</td><td>0 to 1 Million in 90 Days Dropshipping as a Beginner</td><td>173 MB</td></tr><tr><td>00:03:31</td><td>Backend Customer Data</td><td>257 MB</td></tr><tr><td>00:03:19</td><td>Reddit Research</td><td>279 MB</td></tr><tr><td>00:03:07</td><td>Brook Hiddink Reviews</td><td>217 MB</td></tr><tr><td>00:01:04</td><td>15-Do You Have a Guarantee</td><td>37 MB</td></tr><tr><td>00:00:48</td><td>1-Ive Never Sold a Product Online Before</td><td>26 MB</td></tr><tr><td>00:00:36</td><td>26 - What Are Realistic IncomeResults Expectations</td><td>21 MB</td></tr><tr><td>00:00:35</td><td>25- How Long Have You Been Doing It Prove It</td><td>17 MB</td></tr><tr><td>00:00:26</td><td>6-Can I Do This With a Full Time Job</td><td>15 MB</td></tr><tr><td>00:00:26</td><td>8-Im Not Tech Savvy What Skills Are Required</td><td>16 MB</td></tr><tr><td>00:00:23</td><td>18 - How Many Hours Per Day Does This Require</td><td>14 MB</td></tr><tr><td>00:00:21</td><td>21 - Whats The Timeframe For Your First Sale</td><td>12 MB</td></tr></tbody></table></div></section>
+
+<section><h2>Funnel pages</h2>
+<p class="lede">Both funnels captured end to end, including the forced-consumption step
+most people never see.</p><div class="grid g4"><figure class="sh" onclick="openLb(0)"><img loading="lazy" src="media/thumb/brook_VSL_01_VSL_application.jpg" alt="01 VSL application"><figcaption><b>01 VSL application</b><span>VSL funnel</span></figcaption></figure><figure class="sh" onclick="openLb(1)"><img loading="lazy" src="media/thumb/brook_VSL_02_Schedule.jpg" alt="02 Schedule"><figcaption><b>02 Schedule</b><span>VSL funnel</span></figcaption></figure><figure class="sh" onclick="openLb(2)"><img loading="lazy" src="media/thumb/brook_VSL_03_Confirmation_page.jpg" alt="03 Confirmation page"><figcaption><b>03 Confirmation page</b><span>VSL funnel</span></figcaption></figure><figure class="sh" onclick="openLb(3)"><img loading="lazy" src="media/thumb/brook_VSL_04_Pre-call_workshop_Meta.jpg" alt="04 Pre-call workshop Meta"><figcaption><b>04 Pre-call workshop Meta</b><span>VSL funnel</span></figcaption></figure><figure class="sh" onclick="openLb(4)"><img loading="lazy" src="media/thumb/brook_VSL_05_Forced_consumption_opt-in.jpg" alt="05 Forced consumption opt-in"><figcaption><b>05 Forced consumption opt-in</b><span>VSL funnel</span></figcaption></figure><figure class="sh" onclick="openLb(5)"><img loading="lazy" src="media/thumb/brook_VSL_06_Forced_consumption_application.jpg" alt="06 Forced consumption application"><figcaption><b>06 Forced consumption application</b><span>VSL funnel</span></figcaption></figure><figure class="sh" onclick="openLb(6)"><img loading="lazy" src="media/thumb/brook_VSL_07_Profit_strategy_session.jpg" alt="07 Profit strategy session"><figcaption><b>07 Profit strategy session</b><span>VSL funnel</span></figcaption></figure><figure class="sh" onclick="openLb(7)"><img loading="lazy" src="media/thumb/brook_VSL_08_Next_steps_TY.jpg" alt="08 Next steps TY"><figcaption><b>08 Next steps TY</b><span>VSL funnel</span></figcaption></figure><figure class="sh" onclick="openLb(8)"><img loading="lazy" src="media/thumb/brook_WEB_01_Webinar_opt-in_VIP.jpg" alt="01 Webinar opt-in VIP"><figcaption><b>01 Webinar opt-in VIP</b><span>Webinar funnel</span></figcaption></figure><figure class="sh" onclick="openLb(9)"><img loading="lazy" src="media/thumb/brook_WEB_02_Bridge_page.jpg" alt="02 Bridge page"><figcaption><b>02 Bridge page</b><span>Webinar funnel</span></figcaption></figure><figure class="sh" onclick="openLb(10)"><img loading="lazy" src="media/thumb/brook_WEB_03_Thank-you_page.jpg" alt="03 Thank-you page"><figcaption><b>03 Thank-you page</b><span>Webinar funnel</span></figcaption></figure><figure class="sh" onclick="openLb(11)"><img loading="lazy" src="media/thumb/brook_WEB_04_Replay_page.jpg" alt="04 Replay page"><figcaption><b>04 Replay page</b><span>Webinar funnel</span></figcaption></figure><figure class="sh" onclick="openLb(12)"><img loading="lazy" src="media/thumb/brook_WEB_05_Checkout_995.jpg" alt="05 Checkout 995"><figcaption><b>05 Checkout 995</b><span>Webinar funnel</span></figcaption></figure></div><script>LBS=LBS.concat([{"full": "media/full/brook_VSL_01_VSL_application.jpg", "cap": "01 VSL application  \u00b7  VSL funnel"}, {"full": "media/full/brook_VSL_02_Schedule.jpg", "cap": "02 Schedule  \u00b7  VSL funnel"}, {"full": "media/full/brook_VSL_03_Confirmation_page.jpg", "cap": "03 Confirmation page  \u00b7  VSL funnel"}, {"full": "media/full/brook_VSL_04_Pre-call_workshop_Meta.jpg", "cap": "04 Pre-call workshop Meta  \u00b7  VSL funnel"}, {"full": "media/full/brook_VSL_05_Forced_consumption_opt-in.jpg", "cap": "05 Forced consumption opt-in  \u00b7  VSL funnel"}, {"full": "media/full/brook_VSL_06_Forced_consumption_application.jpg", "cap": "06 Forced consumption application  \u00b7  VSL funnel"}, {"full": "media/full/brook_VSL_07_Profit_strategy_session.jpg", "cap": "07 Profit strategy session  \u00b7  VSL funnel"}, {"full": "media/full/brook_VSL_08_Next_steps_TY.jpg", "cap": "08 Next steps TY  \u00b7  VSL funnel"}, {"full": "media/full/brook_WEB_01_Webinar_opt-in_VIP.jpg", "cap": "01 Webinar opt-in VIP  \u00b7  Webinar funnel"}, {"full": "media/full/brook_WEB_02_Bridge_page.jpg", "cap": "02 Bridge page  \u00b7  Webinar funnel"}, {"full": "media/full/brook_WEB_03_Thank-you_page.jpg", "cap": "03 Thank-you page  \u00b7  Webinar funnel"}, {"full": "media/full/brook_WEB_04_Replay_page.jpg", "cap": "04 Replay page  \u00b7  Webinar funnel"}, {"full": "media/full/brook_WEB_05_Checkout_995.jpg", "cap": "05 Checkout 995  \u00b7  Webinar funnel"}]);</script></section>
+
+<section><h2>How his funnel runs</h2>
+<div class="panel"><ul>
+<li><b>VSL path.</b> <code>highticket.io/freetraining</code> serves a 42:46 VSL on a
+player that hides its file, then an application, a scheduling page, and a confirmation
+page stacked with case-study interviews.</li>
+<li><b>Webinar path — a different business.</b> A VIP opt-in, a bridge page selling a
+paid VIP upgrade before the event has even happened, a countdown thank-you page, then a
+live Zoom room. The pitch closes to a <b>$995 direct checkout</b> at
+<code>1orderaway.com/now</code>, capped at <b>97 spots</b>, with six bonuses stacked to
+a claimed $100k+, a money-back guarantee and a <b>$500 cash rebate</b> when you post
+your first sale over $1,000.</li>
+<li><b>The two funnels connect only at the DQ.</b> Fail the high-ticket application and
+you are routed into the $995 webinar offer. A downsell by design.</li>
+<li><b>No-shows are auto-registered into an encore</b> about 2.5 hours after the live
+room ends. Verified across two separate cycles.</li>
+<li><b>The bridge-page upsell is the notable move</b> — he monetises between
+registration and attendance.</li>
+</ul></div></section>
+</div>
+<footer><div class="wrap">Private research swipe. Captured 30 July 2026.
+Screenshots are unaltered frames from the source recordings and live pages —
+branding and copyright notices preserved. Not affiliated with High Ticket / Brook Hiddink.
+</div></footer>
+<div id="lb"><span class="x" onclick="closeLb()">&times;</span>
+<img id="lbi" alt=""><div class="meta"><span id="lbm"></span></div></div>
+<script>
+function openLb(i){LBI=i;var s=LBS[i];if(!s)return;
+ document.getElementById('lbi').src=s.full;
+ document.getElementById('lbm').textContent=s.cap;
+ document.getElementById('lb').classList.add('on');}
+function closeLb(){document.getElementById('lb').classList.remove('on');}
+document.addEventListener('keydown',function(e){
+ var o=document.getElementById('lb').classList.contains('on');if(!o)return;
+ if(e.key==='Escape')closeLb();
+ if(e.key==='ArrowRight'&&LBI<LBS.length-1)openLb(LBI+1);
+ if(e.key==='ArrowLeft'&&LBI>0)openLb(LBI-1);});
+document.getElementById('lb').addEventListener('click',function(e){
+ if(e.target.id==='lb')closeLb();});
+</script>
+</body></html>

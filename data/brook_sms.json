@@ -1,0 +1,47 @@
+{
+ "note": "Captured from williamprodigy@gmail.com Google Voice forwards. Two full registration cycles observed: 21 June 2026 and 21 July 2026.",
+ "personas": [
+  {
+   "name": "Brook Hiddink (personal)",
+   "number": "(720) 610-3324",
+   "role": "Pre-event. Opens as if Brook is texting personally.",
+   "messages": [
+    "hey is this Will? it's brook from high ticket.",
+    "saw you grabbed a seat on my workshop later. you excited?",
+    "you planning on joining from your cell or laptop?",
+    "quick q before tonight - what made you sign up? want make sure i actually cover the thing you care about, not just talk at you for an hour"
+   ]
+  },
+  {
+   "name": "Anastasia, \"Brook Hiddink's personal assistant\"",
+   "number": "(877) 730-9884",
+   "role": "Logistics, live push, no-show recovery, then long-tail downsell nurture.",
+   "messages": [
+    "Hey Will, Anastasia here (Brook Hiddink's personal assistant) with some incredible news. Your seat on the One Order Away Workshop is now confirmed",
+    "We are LIVE for the EVENT, Will! Tap this link to join the Live Room here NOW on a desktop/laptop... $2000+ in FREE Gifts for attending",
+    "Will Anastasia here. Brook just went live! You haven't missed the Golden Ticket reveal yet, but it's coming up fast.",
+    "We just shot you over an email a few minutes ago. In short..... we were disappointed not to see you on the event last night"
+   ]
+  },
+  {
+   "name": "Jack, \"from High Ticket with Brook Hiddink\"",
+   "number": "(814) 822-5129",
+   "role": "Post-event replay push.",
+   "messages": [
+    "Hiya John, Jack here from High Ticket with Brook Hiddink. Did you make it to our Webinar on Zoom? Here is the recording if you missed it"
+   ]
+  }
+ ],
+ "downsell_ladder": [
+  "Hey Will, Brook here… Noticed you didn't grab the High Ticket Accelerator last week. No worries - I get it. Big commitment, right? That's why I created something a bit different…",
+  "Will - I'm writing this at 4 AM. Can't sleep because I know some good people are going to miss this. Tonight at midnight, I'm pulling the High Ticket Accelerator Lite forever.",
+  "Hey, still thinking about the high ticket ai accelerator? What if you spread payments over time? Start with as little as $295/month.",
+  "Will - 12 hours left to join High Ticket Accelerator Lite. Tomorrow you'll either wake up with access to my complete 'millionaire blueprint'... Or you'll wake up with"
+ ],
+ "angle_tests": [
+  "Hi Will, Brook here. You spent decades building real expertise. What if that knowledge could now earn you $3K-$5K/month without consulting calls or taking on again full-time work? Retirees",
+  "Will, Harvard research found that 73% of retirees are coming up $2000 short every month. Not once - every month, for life.",
+  "Will, Will you be there for the special moments with your son growing up? Or what about your daughter? Or will you miss those moments for meetings?",
+  "Will, Just created a brand new workshop for 9-5ers.... I know that feeling of dread you have before work every day, because I used to have it myself."
+ ]
+}

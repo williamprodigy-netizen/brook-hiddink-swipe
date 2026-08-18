@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shelby Sapp — the whole business, wired</title>
+<style>
+:root{--ink:#0f172a;--muted:#64748b;--line:#cbd5e1;--panel:#f8fafc;
+  --paid:#4f46e5;--ever:#059669;--event:#ea580c}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:#eef0f3;
+  font-family:Inter,system-ui,-apple-system,'Segoe UI',sans-serif;
+  color:var(--ink);-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,b,strong{font-weight:500}
+
+#vp{position:fixed;inset:0;cursor:grab;
+  background-color:#eef0f3;
+  background-image:radial-gradient(#d3d7dd 1px,transparent 1px);background-size:28px 28px}
+#vp.drag{cursor:grabbing}
+#canvas{position:absolute;top:0;left:0;transform-origin:0 0;will-change:transform;
+  width:{{W}}px;height:{{H}}px}
+
+/* ---------- title ---------- */
+.title{position:absolute;left:60px;top:-160px;width:1500px}
+.title .kick{font-size:15px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:10px}
+.title h1{font-size:52px;letter-spacing:-.025em;margin-bottom:14px}
+.title p{font-size:19px;color:#475569;line-height:1.55;max-width:1180px}
+
+/* ---------- bands ---------- */
+.band{position:absolute;left:0;width:100%;pointer-events:none}
+.band span{display:inline-block;margin-left:60px;font-size:18px;font-weight:500;
+  letter-spacing:.11em;text-transform:uppercase}
+.band:after{content:"";position:absolute;left:60px;right:60px;top:34px;height:1px;
+  background:#d7dbe1}
+
+/* ---------- wires ---------- */
+#wires{position:absolute;inset:0;width:{{W}}px;height:{{H}}px;pointer-events:none;z-index:1}
+.alabel{font-family:Inter,system-ui,sans-serif;font-size:15px;fill:#64748b;
+  text-anchor:middle;font-weight:500}
+
+/* ---------- nodes ---------- */
+.n{position:absolute;z-index:2;background:#fff;border:1px solid var(--line);
+  border-radius:12px;padding:15px;overflow:hidden;
+  box-shadow:0 2px 10px rgba(15,23,42,.07)}
+a.n{text-decoration:none;color:inherit;transition:box-shadow .15s,border-color .15s,
+  transform .15s}
+a.n:hover{border-color:#94a3b8;box-shadow:0 10px 28px rgba(15,23,42,.16);
+  transform:translateY(-3px)}
+.n.paid{border-top:4px solid var(--paid)}
+.n.ever{border-top:4px solid var(--ever)}
+.n.event{border-top:4px solid var(--event)}
+.nh{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.tag{font-size:11px;letter-spacing:.11em;font-weight:500;padding:3px 9px;border-radius:5px}
+.paid .tag{background:#eef2ff;color:#4338ca}
+.ever .tag{background:#ecfdf5;color:#047857}
+.event .tag{background:#fff7ed;color:#c2410c}
+.go{font-size:12px;color:var(--muted)}
+a.n:hover .go{color:var(--ink)}
+.nt{font-size:19px;font-weight:500;letter-spacing:-.012em;margin-bottom:3px}
+.nu{font-size:12px;color:var(--muted);font-family:ui-monospace,Menlo,monospace;
+  margin-bottom:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ni{border:1px solid #e2e8f0;border-radius:7px;overflow:hidden;background:var(--panel)}
+.ni img{display:block;width:100%;height:auto}
+.nn{font-size:13.5px;line-height:1.5;color:#475569;margin-top:10px}
+.drs{margin:4px 0 10px}
+.dr{display:flex;justify-content:space-between;gap:12px;font-size:14px;padding:7px 0;
+  border-bottom:1px solid #eef1f5}
+.dr span{color:var(--muted)}
+.dr b{font-weight:500;text-align:right}
+
+/* ---------- sections ---------- */
+.sec{position:absolute;left:60px;z-index:2}
+.sec .sk{font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+  margin-bottom:6px}
+.sec h2{font-size:32px;letter-spacing:-.02em;margin-bottom:8px}
+.sec p.lede{font-size:17px;color:#475569;max-width:1100px;line-height:1.55}
+
+.mail{position:absolute;z-index:2;width:208px;background:#fff;border:1px solid var(--line);
+  border-radius:9px;padding:8px;box-shadow:0 2px 8px rgba(15,23,42,.07)}
+.mail img{display:block;width:100%;height:auto;border-radius:5px;border:1px solid #e8ebef}
+.mail figcaption{padding:8px 2px 1px}
+.mail b{display:block;font-size:11px;color:var(--muted);
+  font-family:ui-monospace,Menlo,monospace;margin-bottom:3px;font-weight:400}
+.mail span{display:block;font-size:12.5px;line-height:1.35;font-weight:500}
+
+.panel{position:absolute;z-index:2;background:#fff;border:1px solid var(--line);
+  border-radius:14px;padding:30px}
+.pcols{display:flex;gap:46px}
+.pcol{flex:1}
+.sub{font-size:16px;font-weight:500;margin-bottom:4px}
+.subnote{font-size:13.5px;color:var(--muted);margin-bottom:18px;line-height:1.5}
+.bar{margin-bottom:16px}
+.bl{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.bl b{font-size:14px;font-weight:500;font-family:ui-monospace,Menlo,monospace}
+.bl em{font-style:normal;font-size:13px;color:var(--muted)}
+.bt{height:11px;background:var(--panel);border-radius:6px;overflow:hidden}
+.bt i{display:block;height:100%;background:var(--paid);border-radius:6px;opacity:.85}
+.cohort{display:flex;align-items:flex-end;gap:16px;height:186px}
+.cc{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
+.cb{width:100%;max-width:54px;background:var(--paid);border-radius:5px 5px 0 0;opacity:.85}
+.cc b{font-size:15px;margin-top:9px}
+.cc span{font-size:12px;color:var(--muted)}
+.hooks{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:8px}
+.hk{border:1px solid var(--line);border-left:3px solid var(--paid);border-radius:8px;
+  padding:13px}
+.hk span{font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.hk p{font-size:14px;margin-top:7px;line-height:1.5}
+.warn{border:1px solid #fed7aa;background:#fffbeb;border-radius:10px;padding:18px 20px;
+  margin:22px 0 26px}
+.warn b{display:block;font-size:15px;color:#9a3412;margin-bottom:6px}
+.warn p{font-size:14px;color:#7c2d12;line-height:1.6}
+.stl{position:absolute;z-index:2;width:440px;height:236px;background:#fff;
+  border:1px solid var(--line);border-top:4px solid var(--paid);border-radius:12px;
+  padding:24px;display:flex;flex-direction:column}
+.stl em{font-style:normal;font-size:13px;font-weight:500;letter-spacing:.12em;
+  color:#a5b0c0;display:block;margin-bottom:10px}
+.stl h4{font-size:20px;line-height:1.25;margin-bottom:10px;letter-spacing:-.015em}
+.stl p{font-size:15px;color:#475569;line-height:1.62}
+
+#hud{position:fixed;right:18px;bottom:18px;display:flex;gap:6px;align-items:center;
+  background:#fff;border:1px solid var(--line);border-radius:11px;padding:7px 9px;
+  box-shadow:0 4px 16px rgba(15,23,42,.14);z-index:20}
+#hud button{height:32px;min-width:32px;border:0;background:var(--panel);border-radius:7px;
+  cursor:pointer;font-size:15px;color:#334155;font-weight:500;padding:0 10px}
+#hud button:hover{background:#e8ebef}
+#hud button.w{font-size:12px;letter-spacing:.05em}
+#hud span{font-size:12px;color:var(--muted);min-width:42px;text-align:center;
+  font-family:ui-monospace,Menlo,monospace}
+#hint{position:fixed;left:18px;bottom:18px;background:rgba(15,23,42,.92);color:#fff;
+  font-size:12.5px;padding:9px 14px;border-radius:9px;z-index:20}
+#hint b{color:#93c5fd;font-weight:500}
+
+/* ---------- branch / routing-logic cards ---------- */
+.br{position:absolute;z-index:2;width:300px;background:#fff;border:1px dashed #b6bec9;
+  border-radius:10px;padding:13px 15px;box-shadow:0 1px 6px rgba(15,23,42,.05)}
+.br .cond{font-size:11px;letter-spacing:.09em;text-transform:uppercase;font-weight:500;
+  margin-bottom:6px;display:block}
+.br.yes .cond{color:#047857}.br.no .cond{color:#b45309}.br.dq .cond{color:#be123c}
+.br p{font-size:13px;line-height:1.5;color:#334155;margin:0}
+.br b{font-weight:500}
+.br .ev{display:block;margin-top:8px;font-size:11.5px;color:#64748b;
+  font-family:ui-monospace,Menlo,monospace;line-height:1.45}
+.br.unver{background:#fffdf5;border-color:#fcd34d}
+.br.unver .cond{color:#a16207}
+.brtag{position:absolute;z-index:2;font-size:11px;letter-spacing:.09em;
+  text-transform:uppercase;color:#94a3b8;font-weight:500}
+</style>
+</head><body>
+<div id="vp"><div id="canvas">
+  <div class="title">
+    <div class="kick">FUNNEL SWIPE · CAPTURED 30 JULY 2026</div>
+    <h1>Brook Hiddink — the whole business</h1>
+    <p>Two mechanisms running off one ad account. A 42-minute VSL into an application,
+    and a nightly WebinarJam event with a paid VIP upsell wedged between registration
+    and attendance. SMS runs across both as three different named people. Every
+    screenshot below is the real page.</p>
+  </div>
+  <svg id="wires" viewBox="0 0 {{W}} {{H}}">
+    <defs>{{MARKERS}}</defs>
+    {{PATHS}}
+  </svg>
+  {{BANDS}}
+  {{NODES}}
+</div></div>
+<div id="hud">
+  <button id="out">&minus;</button><span id="pct">100%</span><button id="in">+</button>
+  <button class="w" data-go="vsl">1 · VSL PATH</button>
+  <button class="w" data-go="web">2 · WEBINAR</button>
+  <button class="w" data-go="sms">3 · SMS / BACK END</button>
+  <button class="w" data-go="all">FIT ALL</button>
+</div>
+<div id="hint">Scroll to move &middot; <b>&#8984; + scroll</b> to zoom &middot; drag to pan &middot; click any screenshot to open it live</div>
+<script>
+const vp=document.getElementById('vp'),cv=document.getElementById('canvas'),
+      pct=document.getElementById('pct');
+const W={{W}},H={{H}};
+let s=1,x=0,y=0,down=false,px=0,py=0,moved=0;
+function clamp(){
+  const vw=vp.clientWidth,vh=vp.clientHeight,cw=W*s,ch=H*s,m=180;
+  x=Math.min(vw-m,Math.max(m-cw,x));
+  y=Math.min(vh-m,Math.max(m-ch-260*s,y));
+}
+const draw=()=>{cv.style.transform=`translate(${x}px,${y}px) scale(${s})`;
+  pct.textContent=Math.round(s*100)+'%';};
+
+vp.addEventListener('mousedown',e=>{down=true;moved=0;px=e.clientX;py=e.clientY;
+  vp.classList.add('drag');});
+addEventListener('mousemove',e=>{if(!down)return;
+  const dx=e.clientX-px,dy=e.clientY-py;moved+=Math.abs(dx)+Math.abs(dy);
+  x+=dx;y+=dy;px=e.clientX;py=e.clientY;clamp();draw();});
+addEventListener('mouseup',()=>{down=false;vp.classList.remove('drag');});
+// a drag that ends on a card must not open the link
+cv.addEventListener('click',e=>{if(moved>6){e.preventDefault();e.stopPropagation();}},true);
+
+vp.addEventListener('wheel',e=>{
+  e.preventDefault();
+  if(e.ctrlKey||e.metaKey){                       // pinch / cmd+wheel = zoom
+    // clamp per-event so one big trackpad flick can't rocket the zoom
+    const f=Math.min(1.18,Math.max(.85,1-e.deltaY*.006)),
+          ns=Math.min(2.5,Math.max(.05,s*f)),
+          r=vp.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top;
+    x=mx-(mx-x)*(ns/s);y=my-(my-y)*(ns/s);s=ns;
+  }else{                                          // plain wheel = scroll the board
+    if(e.shiftKey){x-=e.deltaY;}else{x-=e.deltaX;y-=e.deltaY;}
+  }
+  clamp();draw();},{passive:false});
+
+// frame a region of the canvas, capped so we never zoom past readable
+function frame(x0,y0,w,h,pad,cap){
+  pad=pad||50;
+  s=Math.min((vp.clientWidth-pad*2)/w,(vp.clientHeight-pad*2)/h,cap||1.05);
+  s=Math.max(s,.05);
+  x=(vp.clientWidth-w*s)/2-x0*s;y=(vp.clientHeight-h*s)/2-y0*s;draw();
+}
+const VIEWS={
+  vsl:  ()=>frame(20,-240,2500,1700),
+  web:  ()=>frame(20,1500,2500,1000),
+  sms:  ()=>frame(20,2150,2500,1000),
+  all:  ()=>frame(0,-240,W,H+300,40),
+};
+document.querySelectorAll('#hud button[data-go]').forEach(b=>{
+  b.onclick=()=>VIEWS[b.dataset.go]();});
+document.getElementById('in').onclick=()=>{s=Math.min(2.5,s*1.25);clamp();draw();};
+document.getElementById('out').onclick=()=>{s=Math.max(.05,s/1.25);clamp();draw();};
+addEventListener('keydown',e=>{
+  const k={'1':'vsl','2':'web','3':'sms','0':'all'}[e.key];
+  if(k)VIEWS[k]();});
+addEventListener('resize',()=>VIEWS.vsl());
+addEventListener('load',()=>requestAnimationFrame(VIEWS.paid));
+VIEWS.vsl();
+</script>
+</body>
+</html>
